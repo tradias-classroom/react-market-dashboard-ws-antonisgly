@@ -30,7 +30,7 @@ export function useWebSocket({ url, onMessage }: UseWebSocketOptions) {
     wsRef.current = ws;
 
     ws.onopen = () => {
-      console.log('WebSocket connected');
+      // console.log('WebSocket connected');
     };
 
     ws.onmessage = (event) => {
@@ -39,12 +39,18 @@ export function useWebSocket({ url, onMessage }: UseWebSocketOptions) {
     };
 
     ws.onclose = () => {
-      console.log('WebSocket disconnected');
+      // console.log('WebSocket disconnected');
     };
 
 
     return () => {
       ws.close();
     };
-  }, [url, onMessage]);
+  }, [url]);
+
+  return {
+    closeSocket: () => {
+      wsRef.current?.close();
+    }
+  }
 }
